@@ -1,6 +1,7 @@
 package com.github.simplesteph.kafka.apps.v1;
 
 import com.example.Customer;
+import com.example.CustomerKey;
 import io.confluent.kafka.serializers.KafkaAvroDeserializer;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
@@ -21,12 +22,12 @@ public class KafkaAvroJavaConsumerV1Demo {
         properties.put("auto.offset.reset", "earliest");
 
         // avro part (deserializer)
-        properties.setProperty("key.deserializer", StringDeserializer.class.getName());
+        properties.setProperty("key.deserializer", KafkaAvroDeserializer.class.getName());
         properties.setProperty("value.deserializer", KafkaAvroDeserializer.class.getName());
         properties.setProperty("schema.registry.url", "http://127.0.0.1:8081");
         properties.setProperty("specific.avro.reader", "true");
 
-        KafkaConsumer<String, Customer> kafkaConsumer = new KafkaConsumer<>(properties);
+        KafkaConsumer<CustomerKey, Customer> kafkaConsumer = new KafkaConsumer<>(properties);
         String topic = "customer-avro";
         kafkaConsumer.subscribe(Collections.singleton(topic));
 
@@ -34,10 +35,11 @@ public class KafkaAvroJavaConsumerV1Demo {
 
         while (true){
             System.out.println("Polling");
-            ConsumerRecords<String, Customer> records = kafkaConsumer.poll(1000);
+            ConsumerRecords<CustomerKey, Customer> records = kafkaConsumer.poll(1000);
 
-            for (ConsumerRecord<String, Customer> record : records){
+            for (ConsumerRecord<CustomerKey, Customer> record : records){
                 Customer customer = record.value();
+                System.out.println(record.key());
                 System.out.println(customer);
             }
 

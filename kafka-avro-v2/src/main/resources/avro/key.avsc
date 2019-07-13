@@ -1,0 +1,9 @@
+{
+     "type": "record",
+     "namespace": "com.example",
+     "name": "CustomerKey",
+     "version": "1",
+     "fields": [
+       { "name": "id", "type": "string", "logicalType": "UUID", "doc": "Customer UUID" }
+     ]
+}

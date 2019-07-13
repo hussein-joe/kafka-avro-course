@@ -9,7 +9,7 @@
        { "name": "age", "type": "int", "doc": "Age at the time of registration" },
        { "name": "height", "type": "float", "doc": "Height at the time of registration in cm" },
        { "name": "weight", "type": "float", "doc": "Weight at the time of registration in kg" },
-       { "name": "phone_number", "type": ["null", "string"], "default": null, "doc": "optional phone number"},
-       { "name": "email", "type": "string", "default": "missing@example.com", "doc": "email address"}
+       { "name": "phone_number", "type": ["null", "string"], "default": null, "doc": "Phone number"},
+       { "name": "email", "type": "string", "default": "missing@example.com", "doc": "Email"}
      ]
 }
